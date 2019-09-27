@@ -18,6 +18,7 @@ import org.sonatype.nexus.pax.exam.NexusPaxExamSupport;
 import org.sonatype.nexus.repository.Repository;
 import org.sonatype.nexus.repository.http.HttpStatus;
 import org.sonatype.nexus.repository.storage.Asset;
+import org.sonatype.nexus.repository.storage.Component;
 import org.sonatype.nexus.testsuite.testsupport.NexusITSupport;
 
 import org.junit.After;
@@ -40,6 +41,14 @@ public class ApkProxyIT
 
   private static final String APK_INDEX_URL = "v2.6/main/x86/" + APK_INDEX;
 
+  private static final String APK_ARCHIVE = "a2ps-dev-4.14-r5.apk";
+
+  private static final String APK_VERSION = "4.14-r5";
+
+  private static final String APK_COMPONENT_NAME = "a2ps-dev";
+
+  private static final String APK_ARCHIVE_URL = "v2.6/main/x86/" + APK_ARCHIVE;
+
   private ApkClient proxyClient;
 
   private Repository proxyRepo;
@@ -59,6 +68,8 @@ public class ApkProxyIT
     server = Server.withPort(0)
         .serve("/" + APK_INDEX_URL)
         .withBehaviours(Behaviours.file(testData.resolveFile(APK_INDEX)))
+        .serve("/" + APK_ARCHIVE_URL)
+        .withBehaviours(Behaviours.file(testData.resolveFile(APK_ARCHIVE)))
         .start();
 
     proxyRepo = repos.createApkProxy("apk-test-proxy", server.getUrl().toExternalForm());
@@ -67,6 +78,7 @@ public class ApkProxyIT
 
   @Test
   public void unresponsiveRemoteProduces404() throws Exception {
+    proxyClient.get("stupid/path");
     assertThat(status(proxyClient.get("stupid/path")), is(HttpStatus.NOT_FOUND));
   }
 
@@ -75,8 +87,22 @@ public class ApkProxyIT
     assertThat(status(proxyClient.get(APK_INDEX_URL)), is(HttpStatus.OK));
 
     final Asset asset = findAsset(proxyRepo, APK_INDEX_URL);
-    assertThat(asset.name(), is(equalTo(APK_INDEX)));
+    assertThat(asset.name(), is(equalTo(APK_INDEX_URL)));
     assertThat(asset.format(), is(equalTo(FORMAT_NAME)));
+  }
+
+  @Test
+  public void retrieveApkArchiveFromProxyWhenRemoteOnline() throws Exception {
+    assertThat(status(proxyClient.get(APK_ARCHIVE_URL)), is(HttpStatus.OK));
+
+    final Asset asset = findAsset(proxyRepo, APK_ARCHIVE_URL);
+    assertThat(asset.name(), is(equalTo(APK_ARCHIVE_URL)));
+    assertThat(asset.format(), is(equalTo(FORMAT_NAME)));
+
+    final Component component = findComponent(proxyRepo, APK_COMPONENT_NAME);
+    assertThat(component.version(), is(equalTo(APK_VERSION)));
+    assertThat(component.name(), is(equalTo(APK_COMPONENT_NAME)));
+    assertThat(component.format(), is(equalTo(FORMAT_NAME)));
   }
 
   @After

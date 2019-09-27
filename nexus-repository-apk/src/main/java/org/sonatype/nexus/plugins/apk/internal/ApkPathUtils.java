@@ -101,8 +101,8 @@ public class ApkPathUtils
   /**
    * Builds a path to the archive for a particular path
    */
-  public String archivePath(final String path, final String filename) {
-    return path + "/" + filename + ".apk";
+  public String archivePath(final String path, final String filename, final String version) {
+    return path + "/" + filename + "-" + version + ".apk";
   }
   /**
    * Returns the {@link TokenMatcher.State} for the content.

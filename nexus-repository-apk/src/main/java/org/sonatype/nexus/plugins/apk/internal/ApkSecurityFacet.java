@@ -28,8 +28,8 @@ public class ApkSecurityFacet
 {
   @Inject
   public ApkSecurityFacet(final ApkFormatSecurityContributor securityResource,
-                           @Named("simple") final VariableResolverAdapter variableResolverAdapter,
-                           final ContentPermissionChecker contentPermissionChecker)
+                          @Named("simple") final VariableResolverAdapter variableResolverAdapter,
+                          final ContentPermissionChecker contentPermissionChecker)
   {
     super(securityResource, variableResolverAdapter, contentPermissionChecker);
   }

@@ -63,7 +63,7 @@ public class ApkProxyFacetImpl
     TokenMatcher.State matcherState = pathUtils.matcherState(context);
     switch (assetKind) {
       case ARCHIVE:
-        return getAsset(pathUtils.archivePath(pathUtils.path(matcherState), pathUtils.filename(matcherState)));
+        return getAsset(pathUtils.archivePath(pathUtils.path(matcherState), pathUtils.name(matcherState), pathUtils.version(matcherState)));
       case APK_INDEX:
         return getAsset(pathUtils.path(matcherState));
       default:
@@ -91,7 +91,7 @@ public class ApkProxyFacetImpl
     switch (assetKind) {
       case ARCHIVE:
         log.debug("ARCHIVE" + pathUtils.path(matcherState));
-        return putArchive(pathUtils.path(matcherState), pathUtils.filename(matcherState), pathUtils.version(matcherState), content);
+        return putArchive(pathUtils.path(matcherState), pathUtils.name(matcherState), pathUtils.version(matcherState), content);
       case APK_INDEX:
         log.debug(("APK_INDEX" + pathUtils.path(matcherState)));
         return putIndex(pathUtils.path(matcherState), content);
@@ -109,19 +109,19 @@ public class ApkProxyFacetImpl
 
   @TransactionalStoreBlob
   protected Content doPutArchive(final String path,
-                                 final String filename,
+                                 final String name,
                                  final String version,
                                  final TempBlob archiveContent,
                                  final Payload payload) throws IOException
   {
     StorageTx tx = UnitOfWork.currentTx();
     Bucket bucket = tx.findBucket(getRepository());
-    String assetPath = pathUtils.archivePath(path, filename);
+    String assetPath = pathUtils.archivePath(path, name, version);
 
-    Component component = dataAccess.findComponent(tx, getRepository(), filename, version);
+    Component component = dataAccess.findComponent(tx, getRepository(), name, version);
     if (component == null) {
       component = tx.createComponent(bucket, getRepository().getFormat())
-          .name(filename)
+          .name(name)
           .version(version);
     }
     tx.saveComponent(component);
@@ -184,7 +184,7 @@ public class ApkProxyFacetImpl
     Asset asset = Content.findAsset(tx, tx.findBucket(getRepository()), content);
     if (asset == null) {
       log.debug(
-          "Attempting to set cache info for non-existent CPAN asset {}", content.getAttributes().require(Asset.class)
+          "Attempting to set cache info for non-existent APK asset {}", content.getAttributes().require(Asset.class)
       );
       return;
     }

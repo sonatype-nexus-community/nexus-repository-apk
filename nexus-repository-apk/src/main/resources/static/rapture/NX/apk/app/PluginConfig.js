@@ -14,7 +14,6 @@ Ext.define('NX.apk.app.PluginConfig', {
   '@aggregate_priority': 100,
 
   requires: [
-    'NX.apk.app.PluginStrings',
     'NX.apk.util.ApkRepositoryUrls'
   ]
 });
