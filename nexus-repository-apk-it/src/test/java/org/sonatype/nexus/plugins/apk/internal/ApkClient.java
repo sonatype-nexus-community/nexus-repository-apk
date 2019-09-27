@@ -12,24 +12,21 @@
  */
 package org.sonatype.nexus.plugins.apk.internal;
 
-import javax.annotation.Nonnull;
+import java.net.URI;
 
-import org.sonatype.nexus.repository.cache.CacheControllerHolder;
-import org.sonatype.nexus.repository.cache.CacheControllerHolder.CacheType;
+import org.sonatype.nexus.testsuite.testsupport.FormatClientSupport;
 
-enum AssetKind
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.impl.client.CloseableHttpClient;
+
+public class ApkClient
+    extends FormatClientSupport
 {
-  ARCHIVE(CacheControllerHolder.CONTENT),
-  APK_INDEX(CacheControllerHolder.METADATA);
-
-  private final CacheType cacheType;
-
-  AssetKind(final CacheType cacheType) {
-    this.cacheType = cacheType;
-  }
-
-  @Nonnull
-  public CacheType getCacheType() {
-    return cacheType;
+  public ApkClient(
+      final CloseableHttpClient httpClient,
+      final HttpClientContext httpClientContext,
+      final URI repositoryBaseUri)
+  {
+    super(httpClient, httpClientContext, repositoryBaseUri);
   }
 }

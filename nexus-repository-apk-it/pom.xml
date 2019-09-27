@@ -68,7 +68,7 @@
     </dependency>
     <dependency>
       <groupId>org.sonatype.nexus.plugins</groupId>
-      <artifactId>nexus-repository-cpan</artifactId>
+      <artifactId>nexus-repository-apk</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
