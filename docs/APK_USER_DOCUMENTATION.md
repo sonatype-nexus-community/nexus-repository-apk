@@ -22,7 +22,7 @@
 
 You can create a proxy repository in Nexus Repository Manager that will cache packages from a remote APK repository, like
 http://dl-cdn.alpinelinux.org/alpine/v3.10/main/. Then, you can make `Alpine` use your Nexus Repository Proxy 
-instead of the remote repository by editing `/etc/apk/repositories`. More information can be found [here](https://wiki.alpinelinux.org/wiki/Enable_Community_Repository). You may need to first install nano/vim/etc first for this to work (i.e. `apk add nano`). 
+instead of the remote repository by editing `/etc/apk/repositories`. More information can be found [here](https://wiki.alpinelinux.org/wiki/Enable_Community_Repository). You may need to first install nano/vim/etc for this to work (i.e. `apk add nano`). 
  
 To proxy a APK repository, you simply create a new 'apk (proxy)' as documented in 
 [Repository Management](https://help.sonatype.com/repomanager3/configuration/repository-management) in
