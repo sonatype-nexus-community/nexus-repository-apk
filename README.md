@@ -21,7 +21,7 @@
 * [Developing](#developing)
    * [Requirements](#requirements)
    * [Building](#building)
-* [Using apk with Nexus Repository Manager 3](#using-apk-with-nexus-repository-manager-3)
+* [Using APK with Nexus Repository Manager 3](#using-apk-with-nexus-repository-manager-3)
 * [Compatibility with Nexus Repository Manager 3 Versions](#compatibility-with-nexus-repository-manager-3-versions)
 * [Installing the plugin](#installing-the-plugin)
    * [Easiest Install](#easiest-install)
@@ -61,9 +61,9 @@ For further information like how to persist volumes check out [the GitHub repo f
 
 The application will now be available from your browser at http://localhost:8081
 
-## Using apk With Nexus Repository Manager 3
+## Using APK With Nexus Repository Manager 3
 
-[We have detailed instructions on how to get started here!](docs/apk_USER_DOCUMENTATION.md)
+[We have detailed instructions on how to get started here!](docs/APK_USER_DOCUMENTATION.md)
 
 ## Compatibility with Nexus Repository Manager 3 Versions
 
