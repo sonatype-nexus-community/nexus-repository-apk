@@ -21,7 +21,7 @@
 * [Developing](#developing)
    * [Requirements](#requirements)
    * [Building](#building)
-* [Using APK with Nexus Repository Manager 3](#using-apk-with-nexus-repository-manager-3)
+* [Using apk with Nexus Repository Manager 3](#using-apk-with-nexus-repository-manager-3)
 * [Compatibility with Nexus Repository Manager 3 Versions](#compatibility-with-nexus-repository-manager-3-versions)
 * [Installing the plugin](#installing-the-plugin)
    * [Easiest Install](#permanent-install)
@@ -60,7 +60,7 @@ For further information like how to persist volumes check out [the GitHub repo f
 
 The application will now be available from your browser at http://localhost:8081
 
-## Using APK With Nexus Repository Manager 3
+## Using apk With Nexus Repository Manager 3
 
 [We have detailed instructions on how to get started here!](docs/APK_USER_DOCUMENTATION.md)
 
@@ -127,7 +127,7 @@ good installation path if you are just testing or doing development on the plugi
 
 ### Other Permanent Install Options
 
-There are two other outdated options for Permanent Installation that can be found in the Conda Community Format's [\(more\) Permanent Install](https://github.com/sonatype-nexus-community/nexus-repository-conda/tree/conda-it-md-dr#more-permanent-install) and [\(most\) Permanent Install](https://github.com/sonatype-nexus-community/nexus-repository-conda/tree/conda-it-md-dr#most-permanent-install) instructions. Replace all references to Conda with APK.
+There are two other outdated options for Permanent Installation that can be found in the Conda Community Format's [\(more\) Permanent Install](https://github.com/sonatype-nexus-community/nexus-repository-conda/tree/conda-it-md-dr#more-permanent-install) and [\(most\) Permanent Install](https://github.com/sonatype-nexus-community/nexus-repository-conda/tree/conda-it-md-dr#most-permanent-install) instructions. Replace all references to Conda with apk.
 
 ## The Fine Print
 
