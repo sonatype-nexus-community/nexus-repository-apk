@@ -28,7 +28,8 @@ To proxy a apk repository, you simply create a new 'apk (proxy)' as documented i
 
 Minimal configuration steps are:
 - Define 'Name' - e.g. `apk-proxy`
-- Define URL for 'Remote storage' e.g. [http://dl-cdn.alpinelinux.org/alpine/v3.10/main/](http://dl-cdn.alpinelinux.org/alpine/v3.10/main/)
+- Define URL for 'Remote storage' - e.g. [http://dl-cdn.alpinelinux.org/alpine/v3.10/main/](http://dl-cdn.alpinelinux.org/alpine/v3.10/main/)
+- Select a `Blob store` for `Storage`
 
 If you haven't already, edit the `Apline` file located at `/etc/apk/repositories` to use your apk-proxy (i.e. add `http://localhost:8081/repository/apk-proxy/` and comment out or delete the other remote repo locations).
 
