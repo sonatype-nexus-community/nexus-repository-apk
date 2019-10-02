@@ -10,7 +10,7 @@ RUN cd /nexus-repository-apk/; \
 
 FROM sonatype/nexus3:$NEXUS_VERSION
 
-ARG FORMAT_VERSION=0.0.1-SNAPSHOT
+ARG FORMAT_VERSION=0.0.1
 ARG DEPLOY_DIR=/opt/sonatype/nexus/deploy/
 USER root
 COPY --from=build /nexus-repository-apk/nexus-repository-apk/target/nexus-repository-apk-${FORMAT_VERSION}-bundle.kar ${DEPLOY_DIR}
