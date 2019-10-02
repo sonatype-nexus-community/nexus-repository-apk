@@ -29,8 +29,7 @@ trait ApkRepoRecipes
     extends ConfigurationRecipes
 {
   @Nonnull
-  Repository createApkProxy(final String name,
-                            final String remoteUrl)
+  Repository createApkProxy(final String name, final String remoteUrl)
   {
     createRepository(createProxy(name, 'apk-proxy', remoteUrl))
   }
