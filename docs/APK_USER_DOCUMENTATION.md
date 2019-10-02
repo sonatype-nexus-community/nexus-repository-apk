@@ -20,22 +20,21 @@
 
 ### Proxying APK repository
 
-You can create a proxy repository in Nexus Repository Manager that will cache packages from a remote APK repository, like
-http://dl-cdn.alpinelinux.org/alpine/v3.10/main/. Then, you can make `Alpine` use your Nexus Repository Proxy 
-instead of the remote repository by editing `/etc/apk/repositories`. More information can be found [here](https://wiki.alpinelinux.org/wiki/Enable_Community_Repository). You may need to first install nano/vim/etc for this to work (i.e. `apk add nano`). 
+You can create a proxy repository in Nexus Repository Manager (NXRM) that will cache packages from a remote APK repository such as
+http://dl-cdn.alpinelinux.org/alpine/v3.10/main/. To make `Alpine` use your NXRM Proxy, you will need to edit the file located at `/etc/apk/repositories`. More information can be found [here](https://wiki.alpinelinux.org/wiki/Enable_Community_Repository). 
  
 To proxy a APK repository, you simply create a new 'apk (proxy)' as documented in 
-[Repository Management](https://help.sonatype.com/repomanager3/configuration/repository-management) in
-detail. Minimal configuration steps are:
+[Repository Management](https://help.sonatype.com/repomanager3/configuration/repository-management). 
 
+Minimal configuration steps are:
 - Define 'Name' - e.g. `apk-proxy`
 - Define URL for 'Remote storage' e.g. [http://dl-cdn.alpinelinux.org/alpine/v3.10/main/](http://dl-cdn.alpinelinux.org/alpine/v3.10/main/)
 
-If you haven't already, edit in Alpine `/etc/apk/repositories` to use your apk-proxy (i.e. add `http://localhost:8081/repository/apk-proxy/` and comment out or delete the other repo locations).
+If you haven't already, edit the `Apline` file located at `/etc/apk/repositories` to use your apk-proxy (i.e. add `http://localhost:8081/repository/apk-proxy/` and comment out or delete the other remote repo locations).
 
-Now you can run `apk update` and install a package with the `apk add` command, like `apk add git`
+Now you can run `apk update` and install a package with the `apk add` command, like `apk add git`.
 
-The commands above tells APK to update the index of available packages and install the package from your Nexus APK proxy. The Nexus APK proxy will 
-download any missing packages from the remote APK repository, and cache the packages on the Nexus APK proxy.
-The next time any client requests the same package from your Nexus APK proxy, the already cached package will
+The command above tells APK to update the index of available packages and install the package from your NXRM APK proxy. The NXRM APK proxy will 
+download any missing packages from the remote APK repository, and cache the packages on the NXRM APK proxy.
+The next time any client requests the same package from your NXRM APK proxy, the already cached package will
 be returned to the client.

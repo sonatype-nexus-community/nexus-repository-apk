@@ -24,10 +24,9 @@
 * [Using APK with Nexus Repository Manager 3](#using-apk-with-nexus-repository-manager-3)
 * [Compatibility with Nexus Repository Manager 3 Versions](#compatibility-with-nexus-repository-manager-3-versions)
 * [Installing the plugin](#installing-the-plugin)
-   * [Easiest Install](#easiest-install)
+   * [Easiest Install](#permanent-install)
    * [Temporary Install](#temporary-install)
-   * [(more) Permanent Install](#more-permanent-install)
-   * [(most) Permanent Install](#most-permanent-install)
+   * [Other Permanent Install Options](#other-permanent-install-options)
 * [The Fine Print](#the-fine-print)
 * [Getting Help](#getting-help)
 
@@ -36,7 +35,7 @@
 ### Requirements
 
 * [Apache Maven 3.3.3+](https://maven.apache.org/install.html)
-* [Java 8+](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * Network access to https://repository.sonatype.org/content/groups/sonatype-public-grid
 
 Also, there is a good amount of information available at [Bundle Development](https://help.sonatype.com/display/NXRM3/Bundle+Development)
@@ -84,7 +83,7 @@ All released versions can be found [here](https://github.com/sonatype-nexus-comm
 
 | Feature | Implemented          |
 |---------|----------------------|
-| Proxy   | :heavy_check_mark: * |
+| Proxy   | :heavy_check_mark:   |
 | Hosted  |                      |
 | Group   |                      |
 
@@ -93,9 +92,9 @@ All released versions can be found [here](https://github.com/sonatype-nexus-comm
 There are a range of options for installing the apk plugin. You'll need to build it first, and
 then install the plugin with the options shown below:
 
-### Easiest Install
+### Permanent Install
 
-Thanks to some upstream work in Nexus Repository (versions newer than 3.15), it's become a LOT easier to install a plugin. To install the `apk` plugin, follow these steps:
+Thanks to some upstream work in Nexus Repository, it's become a LOT easier to install a plugin. To install the `apk` plugin, follow these steps:
 
 * Build the plugin with `mvn clean package -PbuildKar`
 * Copy the `nexus-repository-apk-0.0.1-bundle.kar` file from your `target` folder to the `deploy` folder for your Nexus Repository installation.
@@ -126,38 +125,9 @@ good installation path if you are just testing or doing development on the plugi
   > bundle:start <org.sonatype.nexus.plugins:nexus-repository-apk ID>
   ```
 
-### (more) Permanent Install
+### Other Permanent Install Options
 
-For more permanent installs of the nexus-repository-apk plugin, follow these instructions:
-
-* Copy the bundle (nexus-repository-apk-0.0.1.jar) into <nexus_dir>/deploy
-
-This will cause the plugin to be loaded with each restart of Nexus Repository. As well, this folder is monitored
-by Nexus Repository and the plugin should load within 60 seconds of being copied there if Nexus Repository
-is running. You will still need to start the bundle using the karaf commands mentioned in the temporary install.
-
-### (most) Permanent Install
-
-If you are trying to use the apk plugin permanently, it likely makes more sense to do the following:
-
-* Copy the bundle into `<nexus_dir>/system/org/sonatype/nexus/plugins/nexus-repository-apk/0.0.1/nexus-repository-apk-0.0.1.jar`
-* Make the following additions marked with + to `<nexus_dir>/system/org/sonatype/nexus/assemblies/nexus-core-feature/3.x.y/nexus-core-feature-3.x.y-features.xml`
-
-   ```
-         <feature prerequisite="false" dependency="false">nexus-repository-rubygems</feature>
-   +     <feature prerequisite="false" dependency="false">nexus-repository-apk</feature>
-         <feature prerequisite="false" dependency="false">nexus-repository-gitlfs</feature>
-     </feature>
-   ```
-   And
-   ```
-   + <feature name="nexus-repository-apk" description="org.sonatype.nexus.plugins:nexus-repository-apk" version="0.0.1">
-   +     <details>org.sonatype.nexus.plugins:nexus-repository-apk</details>
-   +     <bundle>mvn:org.sonatype.nexus.plugins/nexus-repository-apk/0.0.1</bundle>
-   + </feature>
-    </features>
-   ```
-This will cause the plugin to be loaded and started with each startup of Nexus Repository.
+There are two other outdated options for Permanent Installation that can be found in the Conda Community Format's [\(more\) Permanent Install](https://github.com/sonatype-nexus-community/nexus-repository-conda/tree/conda-it-md-dr#more-permanent-install) and [\(most\) Permanent Install](https://github.com/sonatype-nexus-community/nexus-repository-conda/tree/conda-it-md-dr#most-permanent-install) instructions. Replace all references to Conda with APK.
 
 ## The Fine Print
 
