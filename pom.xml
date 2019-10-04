@@ -21,7 +21,6 @@
   <artifactId>apk-parent</artifactId>
   <version>0.0.0</version>
   <packaging>pom</packaging>
-  <name>${project.groupId}:${project.artifactId}-parent</name>
 
   <inceptionYear>2019</inceptionYear>
 
