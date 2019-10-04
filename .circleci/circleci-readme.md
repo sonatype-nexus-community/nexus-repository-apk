@@ -13,4 +13,12 @@ The local build runs in a docker container.
           
         circleci local execute -c .circleci/local-config.yml --job 'github-maven-deploy/build-and-test'
 
-    With the above command, those operations what cannot occur locally will show an error (like `Error: FAILED with error not supported`), but the build will proceed and can complete “successfully”, which allows you to verify scripts in your config, etc.
+    With the above command, operations that cannot occur during a local build will show an error like this:
+     
+      ```
+      ... Error: FAILED with error not supported
+      ```
+    
+      However, the build will proceed and can complete “successfully”, which allows you to verify scripts in your config, etc.
+      
+      If the build does complete successfully, you should see a happy yellow `Success!` message.
