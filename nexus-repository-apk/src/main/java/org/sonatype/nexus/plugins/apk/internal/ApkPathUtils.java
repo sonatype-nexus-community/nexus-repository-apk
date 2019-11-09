@@ -78,7 +78,7 @@ public class ApkPathUtils
   }
 
   public String name(final TokenMatcher.State state) {
-    Pattern pattern = Pattern.compile("([a-zA-Z][a-zA-Z0-9]+-)+");
+    Pattern pattern = Pattern.compile("([a-zA-Z][a-zA-Z0-9.]+-)+");
 
     String filename = match(state, "filename");
     Matcher matcher = pattern.matcher(filename);
