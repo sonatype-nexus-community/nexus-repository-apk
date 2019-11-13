@@ -73,4 +73,24 @@ public class ApkPathUtilsTest
 
     assertThat(result, is(equalTo("a2ps-doc")));
   }
+
+  @Test
+public void nameWithDotParseTest() throws Exception {
+  when(state.getTokens()).thenReturn(tokens);
+  when(tokens.get("filename")).thenReturn("lua5.3-libs-5.3.5-r2");
+
+  String result = underTest.name(state);
+
+  assertThat(result, is(equalTo("lua5.3-libs")));
+}
+
+  @Test
+  public void versionWithDotParseTest() throws Exception {
+    when(state.getTokens()).thenReturn(tokens);
+    when(tokens.get("filename")).thenReturn("lua5.3-libs-5.3.5-r2");
+
+    String result = underTest.version(state);
+
+    assertThat(result, is(equalTo("5.3.5-r2")));
+  }
 }
