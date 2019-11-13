@@ -75,22 +75,18 @@ public class ApkPathUtilsTest
   }
 
   @Test
-public void nameWithDotParseTest() throws Exception {
-  when(state.getTokens()).thenReturn(tokens);
-  when(tokens.get("filename")).thenReturn("lua5.3-libs-5.3.5-r2");
+  public void nameWithDotParseTest() throws Exception {
+    when(state.getTokens()).thenReturn(tokens);
+    when(tokens.get("filename")).thenReturn("lua5.3-libs-5.3.5-r2");
 
-  String result = underTest.name(state);
-
-  assertThat(result, is(equalTo("lua5.3-libs")));
-}
+    assertThat(underTest.name(state), is(equalTo("lua5.3-libs")));
+  }
 
   @Test
   public void versionWithDotParseTest() throws Exception {
     when(state.getTokens()).thenReturn(tokens);
     when(tokens.get("filename")).thenReturn("lua5.3-libs-5.3.5-r2");
 
-    String result = underTest.version(state);
-
-    assertThat(result, is(equalTo("5.3.5-r2")));
+    assertThat(underTest.version(state), is(equalTo("5.3.5-r2")));
   }
 }
