@@ -78,6 +78,8 @@ public class ApkPathUtils
   }
 
   public String name(final TokenMatcher.State state) {
+    
+    // See: https://wiki.alpinelinux.org/wiki/APKBUILD_Reference#pkgver
     Pattern pattern = Pattern.compile("(.*)-([.0-9]+[a-zA-Z]?)(_?(alpha|beta|pre|rc|cvs|svn|git|hg|p)?([0-9]+)?)?-r([0-9]+)");
 
     String filename = match(state, "filename");
