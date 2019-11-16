@@ -86,7 +86,7 @@ public class ApkPathUtils
     if (matcher.find()) {
       MatchResult matchResult = matcher.toMatchResult();
 
-      return matchResult.group(0);
+      return matchResult.group(1);
     }
     return "";
   }
