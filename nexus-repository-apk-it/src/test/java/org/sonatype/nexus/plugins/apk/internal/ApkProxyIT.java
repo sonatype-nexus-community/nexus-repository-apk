@@ -44,7 +44,13 @@ public class ApkProxyIT
   private static final String APK_ARCHIVE = "a2ps-dev-4.14-r5.apk";
 
   private static final String APK_ARCHIVE_WITH_DOT = "lua5.3-5.3.5-r2.apk";
-
+  
+  private static final String APK_ARCHIVE_WITH_PLUS = "fcgi++-2.4.0-r8.apk";
+  
+  private static final String APK_ARCHIVE_WITH_UNDERSCORE = "libcom_err-1.45.2-r1.apk";
+  
+  private static final String APK_ARCHIVE_WITH_HYPHEN = "c-ares-1.15.0-r0.apk";
+ 
   private static final String A2PS_VERSION = "4.14-r5";
 
   private static final String A2PS_COMPONENT_NAME = "a2ps-dev";
@@ -52,12 +58,30 @@ public class ApkProxyIT
   private static final String LUA_COMPONENT_NAME = "lua5.3";
 
   private static final String LUA_VERSION = "5.3.5-r2";
+  
+  private static final String FCGI_COMPONENT_NAME = "fcgi++";
+
+  private static final String FCGI_VERSION = "2.4.0-r8";  
+  
+  private static final String LCE_COMPONENT_NAME = "libcom_err";
+
+  private static final String LCE_VERSION = "1.45.2-r1";
+
+  private static final String CARES_COMPONENT_NAME = "c-ares";
+
+  private static final String CARES_VERSION = "1.15.0-r0";    
 
   private static final String PATH_APK_INDEX = DIRECTORY_MAIN + APK_INDEX;
 
   private static final String PATH_APK_ARCHIVE = DIRECTORY_MAIN + APK_ARCHIVE;
 
   private static final String PATH_APK_ARCHIVE_WITH_DOT = DIRECTORY_MAIN + APK_ARCHIVE_WITH_DOT;
+  
+  private static final String PATH_APK_ARCHIVE_WITH_PLUS = DIRECTORY_MAIN + APK_ARCHIVE_WITH_PLUS;
+  
+  private static final String PATH_APK_ARCHIVE_WITH_UNDERSCORE = DIRECTORY_MAIN + APK_ARCHIVE_WITH_UNDERSCORE;
+  
+  private static final String PATH_APK_ARCHIVE_WITH_HYPHEN = DIRECTORY_MAIN + APK_ARCHIVE_WITH_HYPHEN;
 
   private ApkClient proxyClient;
 
@@ -82,6 +106,12 @@ public class ApkProxyIT
         .withBehaviours(Behaviours.file(testData.resolveFile(APK_ARCHIVE)))
         .serve("/" + PATH_APK_ARCHIVE_WITH_DOT)
         .withBehaviours(Behaviours.file(testData.resolveFile(APK_ARCHIVE_WITH_DOT)))
+        .serve("/" + PATH_APK_ARCHIVE_WITH_PLUS)
+        .withBehaviours(Behaviours.file(testData.resolveFile(APK_ARCHIVE_WITH_PLUS)))
+        .serve("/" + PATH_APK_ARCHIVE_WITH_UNDERSCORE)
+        .withBehaviours(Behaviours.file(testData.resolveFile(APK_ARCHIVE_WITH_UNDERSCORE))) 
+        .serve("/" + PATH_APK_ARCHIVE_WITH_HYPHEN)
+        .withBehaviours(Behaviours.file(testData.resolveFile(APK_ARCHIVE_WITH_HYPHEN)))             
         .start();
 
     proxyRepo = repos.createApkProxy("apk-test-proxy", server.getUrl().toExternalForm());
@@ -130,6 +160,48 @@ public class ApkProxyIT
     assertThat(component.name(), is(equalTo(LUA_COMPONENT_NAME)));
     assertThat(component.format(), is(equalTo(FORMAT_NAME)));
   }
+  
+  @Test
+  public void retrieveAssetWithPlusInNameFromProxyWhenRemoteOnline() throws Exception {
+    assertThat(status(proxyClient.get(PATH_APK_ARCHIVE_WITH_PLUS)), is(HttpStatus.OK));
+
+    final Asset asset = findAsset(proxyRepo, PATH_APK_ARCHIVE_WITH_PLUS);
+    assertThat(asset.name(), is(equalTo(PATH_APK_ARCHIVE_WITH_PLUS)));
+    assertThat(asset.format(), is(equalTo(FORMAT_NAME)));
+
+    final Component component = findComponent(proxyRepo, FCGI_COMPONENT_NAME);
+    assertThat(component.version(), is(equalTo(FCGI_VERSION)));
+    assertThat(component.name(), is(equalTo(FCGI_COMPONENT_NAME)));
+    assertThat(component.format(), is(equalTo(FORMAT_NAME)));
+  }
+  
+  @Test
+  public void retrieveAssetWithUnderscoreInNameFromProxyWhenRemoteOnline() throws Exception {
+    assertThat(status(proxyClient.get(PATH_APK_ARCHIVE_WITH_UNDERSCORE)), is(HttpStatus.OK));
+
+    final Asset asset = findAsset(proxyRepo, PATH_APK_ARCHIVE_WITH_UNDERSCORE);
+    assertThat(asset.name(), is(equalTo(PATH_APK_ARCHIVE_WITH_UNDERSCORE)));
+    assertThat(asset.format(), is(equalTo(FORMAT_NAME)));
+
+    final Component component = findComponent(proxyRepo, LCE_COMPONENT_NAME);
+    assertThat(component.version(), is(equalTo(LCE_VERSION)));
+    assertThat(component.name(), is(equalTo(LCE_COMPONENT_NAME)));
+    assertThat(component.format(), is(equalTo(FORMAT_NAME)));
+  }  
+  
+  @Test
+  public void retrieveAssetWithHyphenInNameFromProxyWhenRemoteOnline() throws Exception {
+    assertThat(status(proxyClient.get(PATH_APK_ARCHIVE_WITH_HYPHEN)), is(HttpStatus.OK));
+
+    final Asset asset = findAsset(proxyRepo, PATH_APK_ARCHIVE_WITH_HYPHEN);
+    assertThat(asset.name(), is(equalTo(PATH_APK_ARCHIVE_WITH_HYPHEN)));
+    assertThat(asset.format(), is(equalTo(FORMAT_NAME)));
+
+    final Component component = findComponent(proxyRepo, CARES_COMPONENT_NAME);
+    assertThat(component.version(), is(equalTo(CARES_VERSION)));
+    assertThat(component.name(), is(equalTo(CARES_COMPONENT_NAME)));
+    assertThat(component.format(), is(equalTo(FORMAT_NAME)));
+  } 
 
   @After
   public void tearDown() throws Exception {
