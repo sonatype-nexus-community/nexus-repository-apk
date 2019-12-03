@@ -2,66 +2,42 @@ version: 2.1
 
 orbs:
   github-maven-deploy: github-maven-deploy/github-maven-deploy@1.0.5
+  circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@0.0.11
 
-mvn-build-test-command: &mvn-build-test-command
-  mvn-build-test-command: mvn clean verify -PbuildKar -Dit
+# mvn-build-test-command: &mvn-build-test-command
+#   mvn-build-test-command: mvn clean verify -PbuildKar -Dit
 
-mvn-deploy-command: &mvn-deploy-command
-  mvn-deploy-command: mvn -s .circleci/.maven.xml clean deploy -PbuildKar -DdeployAtEnd=true -DperformRelease=true -DskipTests -Dspotbugs.skip=true
-  context: rso-base
+# mvn-deploy-command: &mvn-deploy-command
+#   mvn-deploy-command: mvn -s .circleci/.maven.xml clean deploy -PbuildKar -DdeployAtEnd=true -DperformRelease=true -DskipTests -Dspotbugs.skip=true
+#   context: rso-base
 
-mvn-collect-artifacts-command: &mvn-collect-artifacts-command
-  mvn-collect-artifacts-command: |
-    mkdir -p ~/project/artifacts/junit/
-    find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/project/artifacts/junit/ \;
-    cp ~/project/nexus-repository-apk-it/target/failsafe-reports/*.xml ~/project/artifacts/junit/
+# mvn-collect-artifacts-command: &mvn-collect-artifacts-command
+#   mvn-collect-artifacts-command: |
+#     mkdir -p ~/project/artifacts/junit/
+#     find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/project/artifacts/junit/ \;
+#     cp ~/project/nexus-repository-apk-it/target/failsafe-reports/*.xml ~/project/artifacts/junit/
 
 workflows:
-  workflow:
+  build-and-test:
     jobs:
       - github-maven-deploy/build-and-test:
-          <<: *mvn-build-test-command
-          <<: *mvn-collect-artifacts-command
-
-      - github-maven-deploy/approve-deploy-patch-version:
-          type: approval
-          requires:
-            - github-maven-deploy/build-and-test
-          filters:
-            branches:
-              only: master
-      - github-maven-deploy/approve-deploy-minor-version:
-          type: approval
-          requires:
-            - github-maven-deploy/build-and-test
-          filters:
-            branches:
-              only: master
-      - github-maven-deploy/approve-deploy-major-version:
-          type: approval
-          requires:
-            - github-maven-deploy/build-and-test
-          filters:
-            branches:
-              only: master
-      - github-maven-deploy/deploy-patch-version:
-          requires:
-            - github-maven-deploy/approve-deploy-patch-version
-          <<: *mvn-deploy-command
-          filters:
-            branches:
-              only: master
-      - github-maven-deploy/deploy-minor-version:
-          requires:
-            - github-maven-deploy/approve-deploy-minor-version
-          <<: *mvn-deploy-command
-          filters:
-            branches:
-              only: master
-      - github-maven-deploy/deploy-major-version:
-          requires:
-            - github-maven-deploy/approve-deploy-major-version
-          <<: *mvn-deploy-command
-          filters:
-            branches:
-              only: master
+          mvn-build-test-command: mvn clean verify -PbuildKar -Dit
+          mvn-collect-artifacts-command: |
+            mkdir -p ~/project/artifacts/junit/
+            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/project/artifacts/junit/ \;
+            cp ~/project/nexus-repository-apk-it/target/failsafe-reports/*.xml ~/project/artifacts/junit/
+  run-release:
+      jobs:
+        - approve-release:
+            type: approval
+            filters:
+              branches:
+                only: master
+        - circleci-maven-release-orb/run-maven-release:
+            requires:
+              - approve-release
+            ssh-fingerprints: "1d:aa:95:5b:4e:46:f7:12:23:18:47:90:0d:7a:6d:26"
+            context: rso-base
+            filters:
+              branches:
+                only: master
