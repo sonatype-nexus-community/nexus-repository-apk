@@ -29,12 +29,17 @@
     <module>nexus-repository-apk-it</module>
   </modules>
 
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
+<scm>
+  <developerConnection>scm:git:git@github.com:bhamail/test-circleci-maven-release.git</developerConnection>
+  <tag>HEAD</tag>
+</scm>
+
+<distributionManagement>
+  <repository>
+    <id>rso</id>
+    <url>https://repository.sonatype.org/content/repositories/releases/</url>
+  </repository>
+</distributionManagement>
 
   <properties>
     <nxrm-version>3.19.0-01</nxrm-version>
@@ -50,6 +55,12 @@
 
   <build>
     <plugins>
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <releaseProfiles>gpg-sign</releaseProfiles>
+        </configuration>
+      </plugin>
       <!--
       Ensure use of Java 8, as required by NXRM
       -->
@@ -132,14 +143,14 @@
                 <goals>
                   <goal>sign</goal>
                 </goals>
+                <configuration>
+                  <gpgArguments>
+                    <arg>--pinentry-mode</arg>
+                    <arg>loopback</arg>
+                  </gpgArguments>
+                </configuration>
               </execution>
             </executions>
-            <configuration>
-              <gpgArguments>
-                <gpgArgument>--pinentry-mode</gpgArgument>
-                <gpgArgument>loopback</gpgArgument>
-              </gpgArguments>
-            </configuration>
           </plugin>
         </plugins>
       </build>
