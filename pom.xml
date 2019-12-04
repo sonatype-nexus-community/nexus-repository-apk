@@ -29,21 +29,22 @@
     <module>nexus-repository-apk-it</module>
   </modules>
 
-<scm>
-  <developerConnection>scm:git:git@github.com:bhamail/test-circleci-maven-release.git</developerConnection>
-  <tag>HEAD</tag>
-</scm>
-
-<distributionManagement>
-  <repository>
-    <id>rso</id>
-    <url>https://repository.sonatype.org/content/repositories/releases/</url>
-  </repository>
-</distributionManagement>
+ <scm>
+    <developerConnection>scm:git:git@github.com:sonatype-nexus-community/nexus-repository-apk.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+  
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
 
   <properties>
     <nxrm-version>3.19.0-01</nxrm-version>
   </properties>
+
 
   <repositories>
     <!-- ensure we can find the parent pom when starting from an empty local .m2 repository -->
