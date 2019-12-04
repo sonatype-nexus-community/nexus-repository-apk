@@ -60,6 +60,12 @@
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
           <releaseProfiles>gpg-sign</releaseProfiles>
+          <!--
+          CI build runs out of memory during release, with error like this:
+          Failed to execute goal org.apache.maven.plugins:maven-release-plugin:2.5.2:prepare (default-cli) on project nexus-repository-base: Maven execution failed, exit code: '137' -> [Help 1]
+          TODO: Investigate increasing available memory for the CI build
+          -->
+          <arguments>-DskipTests</arguments>
         </configuration>
       </plugin>
       <!--
