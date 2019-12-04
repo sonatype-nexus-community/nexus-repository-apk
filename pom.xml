@@ -29,6 +29,11 @@
     <module>nexus-repository-apk-it</module>
   </modules>
 
+ <scm>
+    <developerConnection>scm:git:git@github.com:sonatype-nexus-community/nexus-repository-apk.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+  
   <distributionManagement>
     <snapshotRepository>
       <id>ossrh</id>
@@ -40,6 +45,7 @@
     <nxrm-version>3.19.0-01</nxrm-version>
   </properties>
 
+
   <repositories>
     <!-- ensure we can find the parent pom when starting from an empty local .m2 repository -->
     <repository>
@@ -50,6 +56,12 @@
 
   <build>
     <plugins>
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <releaseProfiles>gpg-sign</releaseProfiles>
+        </configuration>
+      </plugin>
       <!--
       Ensure use of Java 8, as required by NXRM
       -->
@@ -132,14 +144,14 @@
                 <goals>
                   <goal>sign</goal>
                 </goals>
+                <configuration>
+                  <gpgArguments>
+                    <arg>--pinentry-mode</arg>
+                    <arg>loopback</arg>
+                  </gpgArguments>
+                </configuration>
               </execution>
             </executions>
-            <configuration>
-              <gpgArguments>
-                <gpgArgument>--pinentry-mode</gpgArgument>
-                <gpgArgument>loopback</gpgArgument>
-              </gpgArguments>
-            </configuration>
           </plugin>
         </plugins>
       </build>
