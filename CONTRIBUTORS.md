@@ -16,6 +16,7 @@ A lot of awesome people have contributed to this project! Here they are:
 
 Sonatype internal people, in alphabetical order by username:
 
+* [@allenhsieh](https://github.com/allenhsieh) (Allen Hsieh)
 * [@bhamail](https://github.com/bhamail) (Dan Rollo)
 * [@DarthHater](https://github.com/darthhater/) (Jeffry Hesse)
 
