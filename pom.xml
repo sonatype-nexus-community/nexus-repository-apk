@@ -19,7 +19,7 @@
   </parent>
 
   <artifactId>apk-parent</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.3-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <inceptionYear>2019</inceptionYear>
@@ -59,6 +59,8 @@
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
+          <!-- Something in the pom hierarchy overrides the default 'pushChanges == true', so we reset that here. -->
+          <pushChanges>true</pushChanges>
           <releaseProfiles>gpg-sign</releaseProfiles>
           <!--
           CI build runs out of memory during release, with error like this:
