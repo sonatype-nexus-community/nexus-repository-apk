@@ -127,7 +127,7 @@ good installation path if you are just testing or doing development on the plugi
 
 ### Other Permanent Install Options
 
-There are two other outdated options for Permanent Installation that can be found in the Conda Community Format's [\(more\) Permanent Install](https://github.com/sonatype-nexus-community/nexus-repository-conda/tree/conda-it-md-dr#more-permanent-install) and [\(most\) Permanent Install](https://github.com/sonatype-nexus-community/nexus-repository-conda/tree/conda-it-md-dr#most-permanent-install) instructions. Replace all references to Conda with apk.
+There are two other outdated options for Permanent Installation that can be found in the Composer Community Format's [\(more\) Permanent Install](https://github.com/sonatype-nexus-community/nexus-repository-composer/blob/master/README.md#more-permanent-install) and [\(most\) Permanent Install](https://github.com/sonatype-nexus-community/nexus-repository-composer/blob/master/README.md#most-permanent-install) instructions. Replace all references to Composer with apk.
 
 ## The Fine Print
 
