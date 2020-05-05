@@ -21,6 +21,7 @@ workflows:
               branches:
                 only: master
         - circleci-maven-release-orb/run-maven-release:
+            mvn-release-perform-command: mvn --batch-mode release:perform -s .circleci/.maven.xml -PbuildKar
             requires:
               - approve-release
             ssh-fingerprints: "1d:aa:95:5b:4e:46:f7:12:23:18:47:90:0d:7a:6d:26"

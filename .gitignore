@@ -31,3 +31,6 @@ out
 
 # Netbeans
 **/nb-configuration.xml
+
+# ci config for local ci build
+.circleci/local-config.yml
