@@ -40,6 +40,10 @@
 
 Also, there is a good amount of information available at [Bundle Development](https://help.sonatype.com/display/NXRM3/Bundle+Development)
 
+### Download
+
+Find the pre-compiled file from [here](https://search.maven.org/search?q=g:%22org.sonatype.nexus.plugins%22%20AND%20a:%22nexus-repository-apk%22).
+
 ### Building
 
 To build the project and generate the bundle use Maven
