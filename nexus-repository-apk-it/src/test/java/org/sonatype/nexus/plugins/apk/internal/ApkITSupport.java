@@ -19,11 +19,16 @@ import javax.annotation.Nonnull;
 import org.sonatype.nexus.pax.exam.NexusPaxExamSupport;
 import org.sonatype.nexus.plugins.apk.internal.fixtures.RepositoryRuleApk;
 import org.sonatype.nexus.repository.Repository;
+import org.sonatype.nexus.repository.storage.Asset;
+import org.sonatype.nexus.repository.storage.Component;
+import org.sonatype.nexus.repository.storage.StorageFacet;
+import org.sonatype.nexus.repository.storage.StorageTx;
 import org.sonatype.nexus.testsuite.testsupport.RepositoryITSupport;
 
 import org.junit.Rule;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.sonatype.nexus.repository.storage.MetadataNodeEntityAdapter.P_NAME;
 
 public class ApkITSupport
     extends RepositoryITSupport
@@ -52,5 +57,23 @@ public class ApkITSupport
         clientContext(),
         repositoryUrl.toURI()
     );
+  }
+
+  protected static Asset findAsset(final Repository repo, final String name) {
+    try (StorageTx tx = getStorageTx(repo)) {
+      tx.begin();
+      return tx.findAssetWithProperty(P_NAME, name, tx.findBucket(repo));
+    }
+  }
+
+  protected static Component findComponent(final Repository repo, final String name) {
+    try (StorageTx tx = getStorageTx(repo)) {
+      tx.begin();
+      return tx.findComponentWithProperty(P_NAME, name, tx.findBucket(repo));
+    }
+  }
+
+  protected static StorageTx getStorageTx(final Repository repository) {
+    return repository.facet(StorageFacet.class).txSupplier().get();
   }
 }
