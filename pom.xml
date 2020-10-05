@@ -15,7 +15,7 @@
   <parent>
     <groupId>org.sonatype.nexus.plugins</groupId>
     <artifactId>nexus-plugins</artifactId>
-    <version>3.26.0-01</version>
+    <version>3.28.0-01</version>
   </parent>
 
   <artifactId>apk-parent</artifactId>
@@ -42,9 +42,8 @@
   </distributionManagement>
 
   <properties>
-    <nxrm-version>3.26.0-01</nxrm-version>
+    <nxrm-version>3.28.0-01</nxrm-version>
   </properties>
-
 
   <repositories>
     <!-- ensure we can find the parent pom when starting from an empty local .m2 repository -->
@@ -113,7 +112,7 @@
       only sign during deploy phase
       -->
       <build>
-        <plugins>       
+        <plugins>
           <plugin>
             <artifactId>maven-gpg-plugin</artifactId>
             <version>1.6</version>
