@@ -12,7 +12,6 @@
  */
 package org.sonatype.nexus.plugins.apk.internal;
 
-import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
 
 import org.sonatype.nexus.blobstore.api.Blob;
@@ -30,6 +29,7 @@ import javax.inject.Named;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.function.Supplier;
 
 import static java.util.Collections.singletonList;
 import static org.sonatype.nexus.common.hash.HashAlgorithm.SHA1;
