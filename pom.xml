@@ -19,7 +19,7 @@
   </parent>
 
   <artifactId>apk-parent</artifactId>
-  <version>0.0.16-SNAPSHOT</version>
+  <version>0.0.17-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <inceptionYear>2019</inceptionYear>
