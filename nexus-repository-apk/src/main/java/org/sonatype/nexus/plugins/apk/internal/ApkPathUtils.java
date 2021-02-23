@@ -31,6 +31,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @Singleton
 public class ApkPathUtils
 {
+  private static String pkgVersionRegex ="([0-9][0-9A-z\\._]*)(-[r][0-9]+)";
+
   /**
    * * Returns the name from a {@link TokenMatcher.State}.
    */
@@ -43,7 +45,7 @@ public class ApkPathUtils
   }
 
   public String version(final TokenMatcher.State state) {
-    Pattern pattern = Pattern.compile("([0-9]+)(\\.[0-9]+)(\\.[0-9]+)?(-[r][0-9]+)");
+    Pattern pattern = Pattern.compile(pkgVersionRegex);
 
     String filename = match(state, "filename");
     Matcher matcher = pattern.matcher(filename);
@@ -80,7 +82,7 @@ public class ApkPathUtils
   public String name(final TokenMatcher.State state) {
     
     // See: https://wiki.alpinelinux.org/wiki/APKBUILD_Reference#pkgver
-    Pattern pattern = Pattern.compile("(.*)-([.0-9]+[a-zA-Z]?)(_?(alpha|beta|pre|rc|cvs|svn|git|hg|p)?([0-9]+)?)?-r([0-9]+)");
+    Pattern pattern = Pattern.compile("(.*)-".concat(pkgVersionRegex));
 
     String filename = match(state, "filename");
     Matcher matcher = pattern.matcher(filename);
