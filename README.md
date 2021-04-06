@@ -12,32 +12,33 @@
     Eclipse Foundation. All other trademarks are the property of their respective owners.
 
 -->
+
 # Nexus Repository apk Format
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.sonatype.nexus.plugins/nexus-repository-apk.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.sonatype.nexus.plugins%22%20AND%20a:%22nexus-repository-apk%22) [![CircleCI](https://circleci.com/gh/sonatype-nexus-community/nexus-repository-apk.svg?style=shield)](https://circleci.com/gh/sonatype-nexus-community/nexus-repository-apk) [![Join the chat at https://gitter.im/sonatype/nexus-developers](https://badges.gitter.im/sonatype/nexus-developers.svg)](https://gitter.im/sonatype/nexus-developers?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![DepShield Badge](https://depshield.sonatype.org/badges/sonatype-nexus-community/nexus-repository-apk/depshield.svg)](https://depshield.github.io)
 
 # Table Of Contents
 
-* [Developing](#developing)
-   * [Requirements](#requirements)
-   * [Download](#download)
-   * [Building](#building)
-* [Using apk with Nexus Repository Manager 3](#using-apk-with-nexus-repository-manager-3)
-* [Compatibility with Nexus Repository Manager 3 Versions](#compatibility-with-nexus-repository-manager-3-versions)
-* [Installing the plugin](#installing-the-plugin)
-   * [Easiest Install](#permanent-install)
-   * [Temporary Install](#temporary-install)
-   * [Other Permanent Install Options](#other-permanent-install-options)
-* [The Fine Print](#the-fine-print)
-* [Getting Help](#getting-help)
+- [Developing](#developing)
+  - [Requirements](#requirements)
+  - [Download](#download)
+  - [Building](#building)
+- [Using apk with Nexus Repository Manager 3](#using-apk-with-nexus-repository-manager-3)
+- [Compatibility with Nexus Repository Manager 3 Versions](#compatibility-with-nexus-repository-manager-3-versions)
+- [Installing the plugin](#installing-the-plugin)
+  - [Easiest Install](#permanent-install)
+  - [Temporary Install](#temporary-install)
+  - [Other Permanent Install Options](#other-permanent-install-options)
+- [The Fine Print](#the-fine-print)
+- [Getting Help](#getting-help)
 
 ## Developing
 
 ### Requirements
 
-* [Apache Maven 3.3.3+](https://maven.apache.org/install.html)
-* [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-* Network access to https://repository.sonatype.org/content/groups/sonatype-public-grid
+- [Apache Maven 3.3.3+](https://maven.apache.org/install.html)
+- [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+- Network access to https://repository.sonatype.org/content/groups/sonatype-public-grid
 
 Also, there is a good amount of information available at [Bundle Development](https://help.sonatype.com/display/NXRM3/Bundle+Development)
 
@@ -59,7 +60,7 @@ If everything checks out, the bundle for apk should be available in the `target`
 
 #### Run as a Docker container
 
-`docker run -d -p 8081:8081 --name nexus-repository-apk nexus-repository-apk` 
+`docker run -d -p 8081:8081 --name nexus-repository-apk nexus-repository-apk`
 
 For further information like how to persist volumes check out [the GitHub repo for our official image](https://github.com/sonatype/docker-nexus3).
 
@@ -80,25 +81,26 @@ To read the generated admin password for your first login to the web UI, you can
 The table below outlines what version of Nexus Repository the plugin was built against
 
 | Plugin Version | Nexus Repository Version |
-|----------------|--------------------------|
+| -------------- | ------------------------ |
 | v0.0.1         | 3.19.0-01                |
 | v0.0.8         | 3.23.0-03                |
 | v0.0.12        | 3.28.0-01                |
+| v0.0.18        | 3.30.0-01                |
 
 If a new version of Nexus Repository is released and the plugin needs changes, a new release will be made, and this
-table will be updated to indicate which version of Nexus Repository it will function against. This is done on a time 
+table will be updated to indicate which version of Nexus Repository it will function against. This is done on a time
 available basis, as this is community supported. If you see a new version of Nexus Repository, go ahead and update the
 plugin and send us a PR after testing it out!
 
 All released versions can be found [here](https://github.com/sonatype-nexus-community/nexus-repository-apk/releases).
 
-## Features Implemented In This Plugin 
+## Features Implemented In This Plugin
 
-| Feature | Implemented          |
-|---------|----------------------|
-| Proxy   | :heavy_check_mark:   |
-| Hosted  |                      |
-| Group   |                      |
+| Feature | Implemented        |
+| ------- | ------------------ |
+| Proxy   | :heavy_check_mark: |
+| Hosted  |                    |
+| Group   |                    |
 
 ## Installing the plugin
 
@@ -109,8 +111,8 @@ then install the plugin with the options shown below:
 
 Thanks to some upstream work in Nexus Repository, it's become a LOT easier to install a plugin. To install the `apk` plugin, follow these steps:
 
-* Build the plugin with `mvn clean package -PbuildKar`
-* Copy the `nexus-repository-apk-0.0.1-bundle.kar` file from your `target` folder to the `deploy` folder for your Nexus Repository installation.
+- Build the plugin with `mvn clean package -PbuildKar`
+- Copy the `nexus-repository-apk-0.0.1-bundle.kar` file from your `target` folder to the `deploy` folder for your Nexus Repository installation.
 
 Once you've done this, go ahead and either restart Nexus Repo, or go ahead and start it if it wasn't running to begin with.
 
@@ -121,11 +123,11 @@ You should see `apk (proxy)` in the available Repository Recipes to use, if all 
 Installations done via the Karaf console will be wiped out with every restart of Nexus Repository. This is a
 good installation path if you are just testing or doing development on the plugin.
 
-* Enable Nexus Repo console: edit `<nexus_dir>/bin/nexus.vmoptions` and change `karaf.startLocalConsole`  to `true`.
+- Enable Nexus Repo console: edit `<nexus_dir>/bin/nexus.vmoptions` and change `karaf.startLocalConsole` to `true`.
 
   More details here: [Bundle Development](https://help.sonatype.com/display/NXRM3/Bundle+Development+Overview)
 
-* Run Nexus Repo console:
+- Run Nexus Repo console:
   ```shell
   # sudo su - nexus
   $ cd <nexus_dir>/bin
@@ -147,14 +149,14 @@ There are two other outdated options for Permanent Installation that can be foun
 It is worth noting that this is **NOT SUPPORTED** by Sonatype, and is a contribution of ours
 to the open source community (read: you!)
 
-Don't worry, using this community item does not "void your warranty". In a worst case scenario, you may be asked 
+Don't worry, using this community item does not "void your warranty". In a worst case scenario, you may be asked
 by the Sonatype Support team to remove the community item in order to determine the root cause of any issues.
 
 Remember:
 
-* Use this contribution at the risk tolerance that you have
-* Do NOT file Sonatype support tickets related to apk support in regard to this plugin
-* DO file issues here on GitHub, so that the community can pitch in
+- Use this contribution at the risk tolerance that you have
+- Do NOT file Sonatype support tickets related to apk support in regard to this plugin
+- DO file issues here on GitHub, so that the community can pitch in
 
 Phew, that was easier than I thought. Last but not least of all:
 
@@ -164,6 +166,6 @@ Have fun creating and using this plugin and the Nexus platform, we are glad to h
 
 Looking to contribute to our code but need some help? There's a few ways to get information:
 
-* Chat with us on [Gitter](https://gitter.im/sonatype/nexus-developers)
-* Check out the [Nexus3](http://stackoverflow.com/questions/tagged/nexus3) tag on Stack Overflow
-* Check out the [Nexus Repository User List](https://groups.google.com/a/glists.sonatype.com/forum/?hl=en#!forum/nexus-users)
+- Chat with us on [Gitter](https://gitter.im/sonatype/nexus-developers)
+- Check out the [Nexus3](http://stackoverflow.com/questions/tagged/nexus3) tag on Stack Overflow
+- Check out the [Nexus Repository User List](https://groups.google.com/a/glists.sonatype.com/forum/?hl=en#!forum/nexus-users)
