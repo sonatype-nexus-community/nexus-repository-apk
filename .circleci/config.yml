@@ -5,19 +5,13 @@ orbs:
   circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@0.0.16
 
 build-and-test-commands: &build-and-test-commands
-  #  remove forkCount arg after debugging container startup issue under CI
-  mvn-build-test-command: |
-    pwd
-    ls -alhr
-    mvn clean --batch-mode verify -PbuildKar -Dit -DforkCount=1
+  mvn-build-test-command: mvn clean --batch-mode verify -PbuildKar -Dit
   mvn-collect-artifacts-command: |
     mkdir -p ~/project/artifacts/junit/
     find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/project/artifacts/junit/ \;
     find . -type f -regex ".*/target/failsafe-reports/.*xml" -exec cp {} ~/project/artifacts/junit/ \;
-    find . -type f -regex ".*/target/failsafe-reports/.*" -exec cp {} ~/project/artifacts/junit/ \;
-    find . -type f -regex ".*/target/it-reports/.*" -exec cp {} ~/project/artifacts/junit/ \;
-    find . -type f -regex "~/project/nexus-repository-apk-it/target/failsafe-reports/.*" -exec cp {} ~/project/artifacts/junit/ \;
-    ls -alh ~/project/artifacts/junit/;
+    mkdir -p ~/project/artifacts/it-reports/
+    find . -type f -regex ".*/target/it-reports/.*" -exec cp {} ~/project/artifacts/it-reports/ \;
 
 release-args: &release-args
   mvn-release-perform-command: mvn --batch-mode release:perform -s .circleci/.maven.xml -PbuildKar
