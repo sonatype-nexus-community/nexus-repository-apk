@@ -6,7 +6,10 @@ orbs:
 
 build-and-test-commands: &build-and-test-commands
   #  remove forkCount arg after debugging container startup issue under CI
-  mvn-build-test-command: mvn clean --batch-mode verify -PbuildKar -Dit -DforkCount=1
+  mvn-build-test-command: |
+    pwd
+    ls -alhr
+    mvn clean --batch-mode verify -PbuildKar -Dit -DforkCount=1
   mvn-collect-artifacts-command: |
     mkdir -p ~/project/artifacts/junit/
     find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/project/artifacts/junit/ \;
