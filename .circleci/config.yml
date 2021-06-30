@@ -6,13 +6,14 @@ orbs:
 
 build-and-test-commands: &build-and-test-commands
   #  remove forkCount arg after debugging container startup issue under CI
-  mvn-build-test-command: mvn clean --batch-mode verify -PbuildKar -Dit -DforkCount=0
+  mvn-build-test-command: mvn clean --batch-mode verify -PbuildKar -Dit -DforkCount=1
   mvn-collect-artifacts-command: |
     mkdir -p ~/project/artifacts/junit/
     find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/project/artifacts/junit/ \;
     find . -type f -regex ".*/target/failsafe-reports/.*xml" -exec cp {} ~/project/artifacts/junit/ \;
     find . -type f -regex ".*/target/failsafe-reports/.*" -exec cp {} ~/project/artifacts/junit/ \;
     find . -type f -regex ".*/target/it-reports/.*" -exec cp {} ~/project/artifacts/junit/ \;
+    find . -type f -regex "~/project/nexus-repository-apk-it/target/failsafe-reports/.*" -exec cp {} ~/project/artifacts/junit/ \;
     ls -alh ~/project/artifacts/junit/;
 
 release-args: &release-args
