@@ -15,7 +15,7 @@
   <parent>
     <groupId>org.sonatype.nexus.plugins</groupId>
     <artifactId>nexus-plugins</artifactId>
-    <version>3.31.1-01</version>
+    <version>3.31.0-01</version>
   </parent>
 
   <artifactId>apk-parent</artifactId>
@@ -42,7 +42,7 @@
   </distributionManagement>
 
   <properties>
-    <nxrm-version>3.31.1-01</nxrm-version>
+    <nxrm-version>3.31.0-01</nxrm-version>
   </properties>
 
   <repositories>
