@@ -43,7 +43,6 @@
 
   <properties>
     <nxrm-version>3.31.0-01</nxrm-version>
-    <nxrm-version>3.31.1-01</nxrm-version>
   </properties>
 
   <repositories>
