@@ -1,18 +1,8 @@
 version: 2.1
 
 orbs:
-#  github-maven-deploy: github-maven-deploy/github-maven-deploy@1.0.5
   maven: circleci/maven@1.2.0
   circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@0.0.16
-
-#build-and-test-commands: &build-and-test-commands
-#  mvn-build-test-command: mvn -fn clean --batch-mode verify -PbuildKar -Dit
-#  mvn-collect-artifacts-command: |
-#    mkdir -p ~/project/artifacts/junit/
-#    find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/project/artifacts/junit/ \;
-#    find . -type f -regex ".*/target/failsafe-reports/.*xml" -exec cp {} ~/project/artifacts/junit/ \;
-#    mkdir -p ~/project/artifacts/it-reports/
-#    find . -type f -regex ".*/target/it-reports/.*" -exec cp {} ~/project/artifacts/it-reports/ \;
 
 release-args: &release-args
   mvn-release-perform-command: mvn --batch-mode release:perform -s .circleci/.maven.xml -PbuildKar
@@ -22,14 +12,10 @@ release-args: &release-args
     branches:
       only: master
 
-executors:
-  openjdk8:
-    docker:
-      - image: 'cimg/openjdk:8.0'
-
 jobs:
   build_and_test:
-    executor: openjdk8
+    docker:
+      - image: 'cimg/openjdk:8.0'
     steps:
       - checkout
       - maven/with_cache:
@@ -56,8 +42,6 @@ jobs:
 workflows:
   build-branch:
     jobs:
-#      - github-maven-deploy/build-and-test:
-#          <<: *build-and-test-commands
       - build_and_test:
           filters:
             branches:
@@ -77,8 +61,6 @@ workflows:
 
   release-from-master:
     jobs:
-#      - github-maven-deploy/build-and-test:
-#          <<: *build-and-test-commands
       - build_and_test:
           filters:
             branches:
