@@ -15,11 +15,11 @@
   <parent>
     <groupId>org.sonatype.nexus.plugins</groupId>
     <artifactId>nexus-plugins</artifactId>
-    <version>3.29.2-02</version>
+    <version>3.31.0-01</version>
   </parent>
 
   <artifactId>apk-parent</artifactId>
-  <version>0.0.18-SNAPSHOT</version>
+  <version>0.0.21-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <inceptionYear>2019</inceptionYear>
@@ -33,7 +33,7 @@
     <developerConnection>scm:git:git@github.com:sonatype-nexus-community/nexus-repository-apk.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
-  
+
   <distributionManagement>
     <snapshotRepository>
       <id>ossrh</id>
@@ -42,7 +42,7 @@
   </distributionManagement>
 
   <properties>
-    <nxrm-version>3.29.2-02</nxrm-version>
+    <nxrm-version>3.31.0-01</nxrm-version>
   </properties>
 
   <repositories>
