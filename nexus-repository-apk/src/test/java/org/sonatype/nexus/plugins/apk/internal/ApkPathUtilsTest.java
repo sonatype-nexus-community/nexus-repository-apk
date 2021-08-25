@@ -89,4 +89,32 @@ public class ApkPathUtilsTest
 
     assertThat(underTest.version(state), is(equalTo("5.3.5-r2")));
   }
+
+  @Test
+  public void versionWithRCParseTest() throws Exception {
+    when(state.getTokens()).thenReturn(tokens);
+    when(tokens.get("filename")).thenReturn("lua-socket-3.0_rc1_git20160306-r2.apk");
+    assertThat(underTest.version(state), is(equalTo("3.0_rc1_git20160306-r2")));
+  }
+
+  @Test
+  public void nameWithRCParseTest() throws Exception {
+    when(state.getTokens()).thenReturn(tokens);
+    when(tokens.get("filename")).thenReturn("lua-socket-3.0_rc1_git20160306-r2.apk");
+    assertThat(underTest.name(state), is(equalTo("lua-socket")));
+  }
+
+  @Test
+  public void versionWithDateTagParseTest() throws Exception {
+    when(state.getTokens()).thenReturn(tokens);
+    when(tokens.get("filename")).thenReturn("ncurses-libs-6.1_p20200118-r4.apk");
+    assertThat(underTest.version(state), is(equalTo("6.1_p20200118-r4")));
+  }
+
+  @Test
+  public void nameWithDateTagParseTest() throws Exception {
+    when(state.getTokens()).thenReturn(tokens);
+    when(tokens.get("filename")).thenReturn("ncurses-libs-6.1_p20200118-r4.apk");
+    assertThat(underTest.name(state), is(equalTo("ncurses-libs")));
+  }
 }
