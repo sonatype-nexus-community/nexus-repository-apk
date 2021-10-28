@@ -10,7 +10,7 @@
  * of Sonatype, Inc. Apache Maven is a trademark of the Apache Software Foundation. M2eclipse is a trademark of the
  * Eclipse Foundation. All other trademarks are the property of their respective owners.
  */
-package org.sonatype.nexus.plugins.apk.internal;
+package org.sonatype.nexus.plugins.apk.orient.internal;
 
 import java.io.IOException;
 
@@ -19,6 +19,7 @@ import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.sonatype.nexus.plugins.apk.internal.AssetKind;
 import org.sonatype.nexus.repository.cache.CacheInfo;
 import org.sonatype.nexus.repository.config.Configuration;
 import org.sonatype.nexus.repository.proxy.ProxyFacetSupport;
@@ -38,7 +39,8 @@ import org.sonatype.nexus.repository.view.payloads.TempBlob;
 import org.sonatype.nexus.transaction.UnitOfWork;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static org.sonatype.nexus.plugins.apk.internal.AssetKind.*;
+import static org.sonatype.nexus.plugins.apk.internal.AssetKind.APK_INDEX;
+import static org.sonatype.nexus.plugins.apk.internal.AssetKind.ARCHIVE;
 import static org.sonatype.nexus.repository.storage.AssetEntityAdapter.P_ASSET_KIND;
 
 @Named
@@ -102,7 +104,7 @@ public class ApkProxyFacetImpl
 
   private Content putArchive(final String path, final String filename, final String version, final Content content) throws IOException {
     StorageFacet storageFacet = facet(StorageFacet.class);
-    try (TempBlob tempBlob = storageFacet.createTempBlob(content.openInputStream(), dataAccess.HASH_ALGORITHMS)) {
+    try (TempBlob tempBlob = storageFacet.createTempBlob(content.openInputStream(), ApkDataAccess.HASH_ALGORITHMS)) {
       return doPutArchive(path, filename, version, tempBlob, content);
     }
   }
@@ -137,7 +139,7 @@ public class ApkProxyFacetImpl
 
   private Content putIndex(final String path, final Content content) throws IOException {
     StorageFacet storageFacet = facet(StorageFacet.class);
-    try (TempBlob tempBlob = storageFacet.createTempBlob(content.openInputStream(), dataAccess.HASH_ALGORITHMS)) {
+    try (TempBlob tempBlob = storageFacet.createTempBlob(content.openInputStream(), ApkDataAccess.HASH_ALGORITHMS)) {
       return doPutIndex(path, tempBlob, content);
     }
   }

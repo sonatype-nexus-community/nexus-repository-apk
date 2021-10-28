@@ -1,6 +1,6 @@
 /*
  * Sonatype Nexus (TM) Open Source Version
- * Copyright (c) 2019-present Sonatype, Inc.
+ * Copyright (c) 2018-present Sonatype, Inc.
  * All rights reserved. Includes the third-party code listed at http://links.sonatype.com/products/nexus/oss/attributions.
  *
  * This program and the accompanying materials are made available under the terms of the Eclipse Public License Version 1.0,
@@ -10,26 +10,9 @@
  * of Sonatype, Inc. Apache Maven is a trademark of the Apache Software Foundation. M2eclipse is a trademark of the
  * Eclipse Foundation. All other trademarks are the property of their respective owners.
  */
-package org.sonatype.nexus.plugins.apk.internal;
+@FeatureFlag(name = ORIENT_ENABLED)
+package org.sonatype.nexus.plugins.apk.orient;
 
-import javax.annotation.Nonnull;
+import org.sonatype.nexus.common.app.FeatureFlag;
 
-import org.sonatype.nexus.repository.cache.CacheControllerHolder;
-import org.sonatype.nexus.repository.cache.CacheControllerHolder.CacheType;
-
-public enum AssetKind
-{
-  ARCHIVE(CacheControllerHolder.CONTENT),
-  APK_INDEX(CacheControllerHolder.METADATA);
-
-  private final CacheType cacheType;
-
-  AssetKind(final CacheType cacheType) {
-    this.cacheType = cacheType;
-  }
-
-  @Nonnull
-  public CacheType getCacheType() {
-    return cacheType;
-  }
-}
+import static org.sonatype.nexus.common.app.FeatureFlags.ORIENT_ENABLED;
