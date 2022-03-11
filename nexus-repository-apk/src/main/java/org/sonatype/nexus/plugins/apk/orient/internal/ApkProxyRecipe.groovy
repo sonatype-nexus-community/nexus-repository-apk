@@ -75,7 +75,7 @@ class ApkProxyRecipe
     repository.attach(componentMaintenanceFacet.get())
     repository.attach(proxyFacet.get())
     repository.attach(storageFacet.get())
-    repository.attach(searchFacet.get())
+    repository.attach(elasticSearchFacet.get())
     repository.attach(purgeUnusedFacet.get())
     repository.attach(attributesFacet.get())
   }
