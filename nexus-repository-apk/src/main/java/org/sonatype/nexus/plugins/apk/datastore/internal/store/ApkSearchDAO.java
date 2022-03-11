@@ -12,21 +12,9 @@
  */
 package org.sonatype.nexus.plugins.apk.datastore.internal.store;
 
-import javax.inject.Named;
+import org.sonatype.nexus.repository.content.search.SearchDAO;
 
-import org.sonatype.nexus.plugins.apk.internal.ApkFormat;
-import org.sonatype.nexus.repository.content.store.FormatStoreModule;
-
-/**
- * Configures the content store bindings for a apk format.
- */
-@Named(ApkFormat.NAME)
-public class ApkStoreModule
-    extends FormatStoreModule<ApkContentRepositoryDAO,
-                              ApkComponentDAO,
-                              ApkAssetDAO,
-                              ApkAssetBlobDAO,
-                              ApkSearchDAO>
+public interface ApkSearchDAO extends SearchDAO
 {
-  // nothing to add...
+  // nothing to add...maybe
 }
