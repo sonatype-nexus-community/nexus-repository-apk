@@ -25,8 +25,7 @@ public class ApkStoreModule
     extends FormatStoreModule<ApkContentRepositoryDAO,
                               ApkComponentDAO,
                               ApkAssetDAO,
-                              ApkAssetBlobDAO,
-                              ApkSearchDAO>
+                              ApkAssetBlobDAO>
 {
   // nothing to add...
 }
