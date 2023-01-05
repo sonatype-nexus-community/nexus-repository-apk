@@ -17,6 +17,8 @@ import java.net.URL;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 
+import org.ops4j.pax.exam.MavenUtils;
+import org.ops4j.pax.exam.Option;
 import org.sonatype.nexus.pax.exam.NexusPaxExamSupport;
 import org.sonatype.nexus.plugins.apk.internal.fixtures.RepositoryRuleApk;
 import org.sonatype.nexus.repository.Repository;
@@ -26,6 +28,7 @@ import org.sonatype.nexus.testsuite.testsupport.RepositoryITSupport;
 import org.junit.Rule;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.ops4j.pax.exam.CoreOptions.maven;
 
 public class ApkITSupport
     extends RepositoryITSupport
@@ -57,5 +60,14 @@ public class ApkITSupport
         clientContext(),
         repositoryUrl.toURI()
     );
+  }
+
+  /**
+   * Override {@link NexusPaxExamSupport#nexusFeature(String, String)} to use plugin's version instead of Nexus one
+   * @return Pax-Exam option to install a Nexus plugin based on groupId and artifactId
+   */
+  public static Option nexusFeature(final String groupId, final String artifactId) {
+    return nexusFeature(maven(groupId, artifactId).versionAsInProject().classifier("features").type("xml"),
+        artifactId + '/' + MavenUtils.getArtifactVersion(groupId, artifactId));
   }
 }

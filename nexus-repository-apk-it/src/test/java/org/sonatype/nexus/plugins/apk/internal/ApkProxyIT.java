@@ -17,7 +17,7 @@ import org.sonatype.goodies.httpfixture.server.fluent.Server;
 import org.sonatype.nexus.pax.exam.NexusPaxExamSupport;
 import org.sonatype.nexus.repository.Repository;
 import org.sonatype.nexus.repository.http.HttpStatus;
-import org.sonatype.nexus.testsuite.testsupport.NexusITSupport;
+import org.sonatype.nexus.testsuite.testsupport.NexusBaseITSupport;
 
 import org.junit.After;
 import org.junit.Before;
@@ -88,8 +88,8 @@ public class ApkProxyIT
   @Configuration
   public static Option[] configureNexus() {
     return NexusPaxExamSupport.options(
-        NexusITSupport.configureNexusBase(),
-        nexusFeature("org.sonatype.nexus.plugins", "nexus-repository-apk")
+        NexusBaseITSupport.configureNexusBase(),
+        ApkITSupport.nexusFeature("org.sonatype.nexus.plugins", "nexus-repository-apk")
     );
   }
 
