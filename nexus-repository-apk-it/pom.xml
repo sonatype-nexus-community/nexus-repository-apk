@@ -55,6 +55,14 @@
     </dependency>
     <dependency>
       <groupId>org.sonatype.nexus.testsuite</groupId>
+      <artifactId>nexus-repository-content-testsupport</artifactId>
+      <version>${nxrm-version}</version>
+      <type>xml</type>
+      <classifier>features</classifier>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.sonatype.nexus.testsuite</groupId>
       <artifactId>nexus-it-suite-data</artifactId>
       <version>${nxrm-version}</version>
       <scope>test</scope>
@@ -92,6 +100,18 @@
               <artifactId>nexus-buildsupport-it-deps</artifactId>
               <version>${nxrm-version}</version>
               <packaging>pom</packaging>
+            </configuration>
+          </execution>
+          <execution>
+            <id>pax-swissbox-extender</id>
+            <phase>package</phase>
+            <goals>
+              <goal>get</goal>
+            </goals>
+            <configuration>
+              <groupId>org.ops4j.pax.swissbox</groupId>
+              <artifactId>pax-swissbox-extender</artifactId>
+              <version>1.8.4</version>
             </configuration>
           </execution>
         </executions>
