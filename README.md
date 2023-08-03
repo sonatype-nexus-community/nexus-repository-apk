@@ -15,7 +15,7 @@
 
 # Nexus Repository apk Format
 
-[![Maven Central](https://img.shields.io/maven-central/v/org.sonatype.nexus.plugins/nexus-repository-apk.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.sonatype.nexus.plugins%22%20AND%20a:%22nexus-repository-apk%22) [![CircleCI](https://circleci.com/gh/sonatype-nexus-community/nexus-repository-apk.svg?style=shield)](https://circleci.com/gh/sonatype-nexus-community/nexus-repository-apk) [![Join the chat at https://gitter.im/sonatype/nexus-developers](https://badges.gitter.im/sonatype/nexus-developers.svg)](https://gitter.im/sonatype/nexus-developers?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![DepShield Badge](https://depshield.sonatype.org/badges/sonatype-nexus-community/nexus-repository-apk/depshield.svg)](https://depshield.github.io)
+[![Maven Central](https://img.shields.io/maven-central/v/org.sonatype.nexus.plugins/nexus-repository-apk.svg?label=Maven%20Central)](https://central.sonatype.com/search?namespace=org.sonatype.nexus.plugins&name=nexus-repository-apk) [![CircleCI](https://circleci.com/gh/sonatype-nexus-community/nexus-repository-apk.svg?style=shield)](https://circleci.com/gh/sonatype-nexus-community/nexus-repository-apk) [![Join the chat at https://gitter.im/sonatype/nexus-developers](https://badges.gitter.im/sonatype/nexus-developers.svg)](https://gitter.im/sonatype/nexus-developers?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![DepShield Badge](https://depshield.sonatype.org/badges/sonatype-nexus-community/nexus-repository-apk/depshield.svg)](https://depshield.github.io)
 
 # Table Of Contents
 
@@ -44,7 +44,7 @@ Also, there is a good amount of information available at [Bundle Development](ht
 
 ### Download
 
-Find pre-compiled files [here](https://search.maven.org/search?q=g:%22org.sonatype.nexus.plugins%22%20AND%20a:%22nexus-repository-apk%22).
+Find pre-compiled files [here](https://central.sonatype.com/search?namespace=org.sonatype.nexus.plugins&name=nexus-repository-apk).
 
 ### Building
 
